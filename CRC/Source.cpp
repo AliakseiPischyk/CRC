@@ -74,10 +74,10 @@ namespace crc
 
 			namespace _8
 			{
-				constexpr parameters<uint16_t> _CDMA2000(0x9B, 0xFF);
-				constexpr parameters<uint16_t> _DVB_S2(0xD5, 0);
-				constexpr parameters<uint16_t> _I_CODE(0x1D, 0xFD);
-				constexpr parameters<uint16_t> _(0x07, 0);
+				constexpr parameters<uint8_t> _CDMA2000(0x9B, 0xFF);
+				constexpr parameters<uint8_t> _DVB_S2(0xD5, 0);
+				constexpr parameters<uint8_t> _I_CODE(0x1D, 0xFD);
+				constexpr parameters<uint8_t> _(0x07, 0);
 			};
 		}
 		
@@ -98,7 +98,7 @@ namespace crc
 	}
 };
 
-bool func(const char* p_data, const size_t crc_bytes) {
+bool func(const char* p_data, const size_t len, const size_t crc_bytes) {
 
 }
 
