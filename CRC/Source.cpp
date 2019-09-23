@@ -98,12 +98,42 @@ namespace crc
 	}
 };
 
-bool func(const char* p_data, const size_t len, const size_t crc_bytes) {
+vector<uint8_t> get_uint8_representation(const uint16_t v) {
+	vector<uint8_t> ret(2);
+	ret[0] = v >> 8;
+	ret[1] = v;
+	return ret;
+}
 
+
+vector<uint8_t> get_uint8_representation(const uint32_t v) {
+	vector<uint8_t> ret(4);
+	ret[0] = v >> 24;
+	ret[1] = v >> 16;
+	ret[2] = v >> 8;
+	ret[3] = v;
+	return ret;
+}
+
+bool func(const char* p_data, const size_t len, const size_t crc_bytes) {
+	return true;
 }
 
 int main() {
-	cout << hex << crc::calculate("123456789", 9, crc::algorithm::bit::_16::_AUG_CCITT);
+	auto a = get_uint8_representation(crc::calculate("123456789", 9, crc::algorithm::bit::_16::_AUG_CCITT));
+	vector<uint8_t> test;
+	const string data = "123456789";
+	for (const auto c : data) {
+		test.push_back(c);
+	}
+	auto crc_uint8_format = get_uint8_representation(crc::calculate(data.data(), data.length(), crc::algorithm::bit::_16::_AUG_CCITT));
+	for (const auto v : crc_uint8_format) {
+		test.push_back(v);
+	}
+	for (auto v : crc_uint8_format) {
+		cout <<hex<<int(v);
+	}
+	
 	system("pause");
 	return 0;
 }
